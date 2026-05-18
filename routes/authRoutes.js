@@ -4,19 +4,8 @@
 
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-
-// Connect to MongoDB
-mongoose.set("strictQuery", false);
-mongoose.connect(process.env.DATABASE, {
-    dbName: "PrettyDecent_DB"
-}).then(() => {
-    console.log("Connected to MongoDB");
-}).catch((error) => {
-    console.error("Error connecting to database", error);
-});
 
 // User model
 const User = require("../models/user");
