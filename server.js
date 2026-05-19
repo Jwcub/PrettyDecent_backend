@@ -18,7 +18,7 @@ const messageRoutes = require("./routes/messageRoutes");
 // Init Express
 const app = express();
 app.use(express.json());
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5500;
 
 // Connect to MongoDB
 mongoose.set("strictQuery", false);
@@ -35,6 +35,14 @@ app.use("/api/", authRoutes);
 app.use("/api/menu", authenticateToken, foodRoutes);
 app.use("/api/reservation", reservationRoutes);
 app.use("/api/message", messageRoutes);
+
+// Information for base URL
+app.get("/", (req, res) => {
+    return res.status(200).json({
+        message: "Welcome to the PrettyDecent API!",
+        version: "1.0.0"
+    });
+});
 
 // Start application
 app.listen(port, () => {
