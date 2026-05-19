@@ -6,12 +6,13 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const authRoutes = require("../middlewares/auth_token");
 
 // User model
 const User = require("../models/user");
 
 // Add a new user
-router.post("/register", async (req, res) => {
+router.post("/register", authRoutes, async (req, res) => {
     try {
         const { username, password, email } = req.body;
 

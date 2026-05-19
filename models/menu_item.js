@@ -14,17 +14,18 @@ const menuSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
-        enum: ["mat", "dryck"]
+        enum: ["food", "drink"]
     },
     category: {
         type: String
     },
     price: {
         type: Number,
+        required: true,
 
     },
     bottle_price: {
-        type: Number,
+        type: Number
     },
     origin: {
         type: String,
@@ -40,4 +41,5 @@ const menuSchema = new mongoose.Schema({
     }
 });
 
-const Menu_item = mongoose.model("Menu_item", menuSchema); 
+const Menu_item = mongoose.model("Menu_item", menuSchema);
+module.exports = Menu_item; 
