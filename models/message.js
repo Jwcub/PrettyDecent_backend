@@ -4,16 +4,20 @@ const mongoose = require("mongoose");
 const messageSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: true
     },
     email: {
         type: String,
         required: true,
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Please fill a valid email address"]
     },
+    title: {
+        type: String,
+        required: true
+    },
     message: {
         type: String,
-        required: true,
+        required: true
     },
     status: {
         type: String,

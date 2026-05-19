@@ -18,7 +18,7 @@ router.post("/", async(req, res) => {
 // Show messages
 router.get("/", authRoutes, async(req, res) => {
     try {
-        let result = await message.find({});
+        let result = await Message.find({});
         return res.status(200).json(result);
     } catch(error) {
         return res.status(400).json({ error: error.message });
