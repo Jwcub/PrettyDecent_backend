@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-require("dotenv").config();
 
 // Menu model
 const Menu_item = require("../models/menu_item");
@@ -16,7 +15,7 @@ router.post("/menu", async(req, res) => {
 });
 
 // Get menu items
-router.get("/menu", async(req, res) => {
+router.get("/", async(req, res) => {
     try {
         let result = await Menu_item.find({});
         return res.status(200).json(result);
@@ -26,7 +25,7 @@ router.get("/menu", async(req, res) => {
 });
 
 // Edit menu item
-router.put("/menu/:id", async(req, res) => {
+router.put("/:id", async(req, res) => {
     try {
         const menuItemId = req.params.id;
         const newMenuData = req.body;
@@ -52,7 +51,7 @@ router.put("/menu/:id", async(req, res) => {
 });
 
 // Delete menu item
-router.delete("/menu/:id", async(req, res) => {
+router.delete("/:id", async(req, res) => {
     try {
         const menuItemId = req.params.id;
 

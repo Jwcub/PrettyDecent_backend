@@ -5,11 +5,15 @@
 
 const express = require("express");
 const mongoose = require("mongoose");
-const authRoutes = require("./routes/authRoutes");
-const foodRoutes = require("./routes/menuRoutes");
 const authenticateToken = require("./middlewares/auth_token")
 const cors = require("cors");
 require("dotenv").config();
+
+// Import routes
+const authRoutes = require("./routes/authRoutes");
+const foodRoutes = require("./routes/menuRoutes");
+const reservationRoutes = require("./routes/reservationRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 
 // Init Express
 const app = express();
@@ -27,8 +31,10 @@ mongoose.connect(process.env.DATABASE, {
 });
 
 // Routes
-app.use("/api", authRoutes);
-app.use("/api", authenticateToken, foodRoutes);
+app.use("/api/", authRoutes);
+app.use("/api/menu", authenticateToken, foodRoutes);
+app.use("/api/reservation", reservationRoutes);
+app.use("/api/message", messageRoutes);
 
 // Start application
 app.listen(port, () => {

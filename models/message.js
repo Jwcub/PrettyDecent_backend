@@ -1,0 +1,30 @@
+const mongoose = require("mongoose");
+
+// Messages schema
+const messageSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Please fill a valid email address"]
+    },
+    message: {
+        type: String,
+        required: true,
+    },
+    status: {
+        type: String,
+        enum: ["new", "pending", "answered"],
+        default: "new"
+    },
+    created: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const Message = mongoose.model("Message", messageSchema);
+module.exports = Message; 
