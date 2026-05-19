@@ -41,6 +41,7 @@ router.put("/menu/:id", async(req, res) => {
              }
         );
 
+        // Does menu item exist?
         if(!updatedMenuItem) return res.status(404).json({ error: "Menu item not found" });
 
         res.status(200).json(updatedMenuItem);
@@ -60,6 +61,7 @@ router.delete("/menu/:id", async(req, res) => {
             { _id: menuItemId }
         );
 
+        // Does menu item exist?
         if(!deletedMenuItem) return res.status(404).json({ error: "Menu item not found" });
 
         res.status(200).json({ message: "Menu item removed "});
