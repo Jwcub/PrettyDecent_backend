@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const authToken = require("../middlewares/auth_token");
 
 // Menu model
 const Menu_item = require("../models/menu_item");
 
 // Add menu item
-router.post("/menu", async(req, res) => {
+router.post("/menu", authToken, async(req, res) => {
     try {
         let result = await Menu_item.create(req.body);
         return res.status(200).json(result);
@@ -25,7 +26,7 @@ router.get("/", async(req, res) => {
 });
 
 // Edit menu item
-router.put("/:id", async(req, res) => {
+router.put("/:id", authToken, async(req, res) => {
     try {
         const menuItemId = req.params.id;
         const newMenuData = req.body;
@@ -51,7 +52,7 @@ router.put("/:id", async(req, res) => {
 });
 
 // Delete menu item
-router.delete("/:id", async(req, res) => {
+router.delete("/:id", authToken, async(req, res) => {
     try {
         const menuItemId = req.params.id;
 

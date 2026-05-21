@@ -5,7 +5,6 @@
 
 const express = require("express");
 const mongoose = require("mongoose");
-const authenticateToken = require("./middlewares/auth_token")
 const cors = require("cors");
 require("dotenv").config();
 
@@ -33,7 +32,7 @@ mongoose.connect(process.env.DATABASE, {
 
 // Routes
 app.use("/api/", authRoutes);
-app.use("/api/menu", authenticateToken, foodRoutes);
+app.use("/api/menu", foodRoutes);
 app.use("/api/reservation", reservationRoutes);
 app.use("/api/message", messageRoutes);
 
