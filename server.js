@@ -18,6 +18,7 @@ const messageRoutes = require("./routes/messageRoutes");
 // Init Express
 const app = express();
 app.use(express.json());
+app.use(cors());
 const port = process.env.PORT || 5500;
 
 // Connect to MongoDB

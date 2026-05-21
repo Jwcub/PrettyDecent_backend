@@ -14,13 +14,13 @@ const User = require("../models/user");
 // Add a new user
 router.post("/register", authRoutes, async (req, res) => {
     try {
-        const { username, password, email } = req.body;
+        const { email, password } = req.body;
 
-        if (!username || !password || !email) {
-            return res.status(400).json({ error: "Invalid input, send username, password and email" });
+        if (!email || !password) {
+            return res.status(400).json({ error: "Invalid input, send email & password" });
         }
 
-        const user = new User({ username, password, email });
+        const user = new User({ email, password });
         await user.save();
 
         res.status(201).json({ message: "User created" });
@@ -28,7 +28,7 @@ router.post("/register", authRoutes, async (req, res) => {
     } catch (error) {
         // Mongoose duplicate key error
         if (error.code === 11000) {
-            return res.status(409).json({ error: "Username or Email already taken" });
+            return res.status(409).json({ error: "Email already registered" });
         }
         res.status(500).json({ error: "Server error" });
     }
@@ -37,28 +37,28 @@ router.post("/register", authRoutes, async (req, res) => {
 // Login user
 router.post("/login", async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
 
         // Validate input 
-        if(!username || !password) {
-            return res.status(400).json({ error: "Invalid input, send username and password" })
+        if(!email || !password) {
+            return res.status(400).json({ error: "Invalid input, send email and password" })
         }
 
         // Check credentials
 
         // Does user exist?
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ email });
         if(!user) {
-            return res.status(401).json({ error: "Incorrect username or password!"})
+            return res.status(401).json({ error: "Incorrect email or password!"})
         }
         
         // Check password
         const isPasswordMatch = await user.comparePassword(password);
         if(!isPasswordMatch) {
-            return res.status(401).json({ error: "Incorrect username or password!"})
+            return res.status(401).json({ error: "Incorrect email or password!"})
         } else {
             // Create JWT
-            const payload = { username: username };
+            const payload = { email: email };
             const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: "3h"});
             const response = {
                 message: "User logged in",
