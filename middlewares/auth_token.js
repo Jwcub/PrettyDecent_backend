@@ -5,11 +5,13 @@ function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
-    if(token == null) res.status(401).json({ message: "Not authorized for this route - token missing!"});
+    if (token == null) {
+        return res.status(401).json({ message: "Not authorized for this route - token missing!" });
+    }
 
-    jwt.verify(token, process.env.JWT_SECRET_KEY, (err, username) => {
+    jwt.verify(token, process.env.JWT_SECRET_KEY, (err, email) => {
         if(err) return res.status(403).json({ message: "Unvalid JWT" });
-        req.username = username;
+        req.email = email;
         next();
     });
 }

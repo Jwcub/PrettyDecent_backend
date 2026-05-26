@@ -6,7 +6,7 @@ const authToken = require("../middlewares/auth_token");
 const Menu_item = require("../models/menu_item");
 
 // Add menu item
-router.post("/menu", authToken, async(req, res) => {
+router.post("/", authToken, async(req, res) => {
     try {
         let result = await Menu_item.create(req.body);
         return res.status(200).json(result);

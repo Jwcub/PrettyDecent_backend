@@ -20,7 +20,7 @@ const reservationSchema = new mongoose.Schema({
         required: true,
         min: [1]
     },
-    allergies: {
+    requests: {
         type: String
     },
     status: {

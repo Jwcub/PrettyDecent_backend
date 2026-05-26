@@ -28,9 +28,14 @@ router.post("/register", authRoutes, async (req, res) => {
     } catch (error) {
         // Mongoose duplicate key error
         if (error.code === 11000) {
-            return res.status(409).json({ error: "Email already registered" });
+            console.log("MongoDB Duplicate Error:", error.keyValue); 
+            return res.status(409).json({ 
+                error: "Mail already registered", 
+                details: error.keyValue 
+            });
         }
-        res.status(500).json({ error: "Server error" });
+        console.error("Det kraschade här:", error);
+        res.status(500).json({ error: "Server error", message: error.message });
     }
 });
 

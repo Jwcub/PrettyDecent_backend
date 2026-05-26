@@ -14,7 +14,7 @@ const menuSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
-        enum: ["food", "drink"]
+        enum: ['food', 'drink']
     },
     category: {
         type: String
