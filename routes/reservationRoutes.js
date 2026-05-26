@@ -11,8 +11,15 @@ router.post("/", async(req, res) => {
         let result = await Reservation.create(req.body);
         return res.status(200).json(result);
     } catch(error) {
-        return res.status(400).json({ error: error.message });
-    }
+
+        if (error.name === 'ValidationError') {
+            const firstKey = Object.keys(error.errors)[0];
+            const errorMessage = error.errors[firstKey].message;
+            return res.status(400).json({ message: errorMessage });
+        }
+
+        res.status(500).json({ error: 'Internal server error' });
+    } 
 });
 
 // Show reservations
