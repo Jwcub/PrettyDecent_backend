@@ -9,8 +9,9 @@ const Message = require("../models/message");
 router.post("/", async(req, res) => {
     try {
         let result = await Message.create(req.body);
-        return res.status(200).json(result);
+        return res.status(200).json({ message: "Message sent" });
     } catch(error) {
+        console.log(error);
         return res.status(400).json({ error: error.message });
     }
 });

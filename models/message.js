@@ -17,7 +17,8 @@ const messageSchema = new mongoose.Schema({
     },
     message: {
         type: String,
-        required: true
+        required: true,
+        min: [10]
     },
     status: {
         type: String,

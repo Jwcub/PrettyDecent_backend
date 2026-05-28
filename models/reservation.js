@@ -42,7 +42,8 @@ const reservationSchema = new mongoose.Schema({
         min: [1, 'Minimum 1 guest required.']
     },
     requests: {
-        type: String
+        type: String,
+        trim: true
     },
     status: {
         type: String,

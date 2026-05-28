@@ -34,7 +34,7 @@ router.post("/register", authRoutes, async (req, res) => {
                 details: error.keyValue 
             });
         }
-        console.error("Det kraschade här:", error);
+        console.error("Error:", error);
         res.status(500).json({ error: "Server error", message: error.message });
     }
 });
