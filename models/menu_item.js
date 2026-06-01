@@ -22,14 +22,6 @@ const menuSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true,
-
-    },
-    bottle_price: {
-        type: Number
-    },
-    origin: {
-        type: String,
-        trim: true
     },
     display: {
         type: Boolean,
