@@ -16,14 +16,14 @@ const reservationSchema = new mongoose.Schema({
         required: true,
         validate: [
       {
-        // DATE VALIDATION (Today or in the future)
+        // DATE VALIDATION
         validator: function(value) {
           const today = new Date();
           today.setHours(0, 0, 0, 0);
           
           return value >= today;
         },
-        message: "You can't make reservations for dates that have past."
+        message: "Din bokning måste avse ett datum frammåt i tiden"
       },
       {
         // TIME VALIDATION
@@ -32,14 +32,14 @@ const reservationSchema = new mongoose.Schema({
           
           return hour >= 15 && hour <= 22;
         },
-        message: "Bookings can only be made for times between 15:00 and 22:00."
+        message: "Det går endast att boka bord för tider mellan 15:00 och 22:00."
       }
     ]
     },
     guests: {
         type: Number,
         required: true,
-        min: [1, 'Minimum 1 guest required.']
+        min: [1, 'Minst 1 gäst']
     },
     requests: {
         type: String,

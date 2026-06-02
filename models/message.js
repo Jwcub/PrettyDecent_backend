@@ -9,7 +9,7 @@ const messageSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Please fill a valid email address"]
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Fyll i en giltig e-postadress"]
     },
     title: {
         type: String,

@@ -42,7 +42,7 @@ router.put("/:id", authToken, async(req, res) => {
         );
 
         // Does menu item exist?
-        if(!updatedMenuItem) return res.status(404).json({ error: "Menu item not found" });
+        if(!updatedMenuItem) return res.status(404).json({ error: "Menyartikeln hittades inte" });
 
         res.status(200).json(updatedMenuItem);
 
@@ -62,9 +62,9 @@ router.delete("/:id", authToken, async(req, res) => {
         );
 
         // Does menu item exist?
-        if(!deletedMenuItem) return res.status(404).json({ error: "Menu item not found" });
+        if(!deletedMenuItem) return res.status(404).json({ error: "Menyartikeln hittades inte" });
 
-        res.status(200).json({ message: "Menu item removed "});
+        res.status(200).json({ message: "Menyartikeln raderad "});
 
     } catch(error) {
         res.status(500).json({ error: error.message })

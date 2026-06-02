@@ -17,25 +17,25 @@ router.post("/register", authRoutes, async (req, res) => {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.status(400).json({ error: "Invalid input, send email & password" });
+            return res.status(400).json({ error: "Ogiltigt värden, ange både användarnamn och lösenord." });
         }
 
         const user = new User({ email, password });
         await user.save();
 
-        res.status(201).json({ message: "User created" });
+        res.status(201).json({ message: "Användare skapad!" });
 
     } catch (error) {
         // Mongoose duplicate key error
         if (error.code === 11000) {
             console.log("MongoDB Duplicate Error:", error.keyValue); 
             return res.status(409).json({ 
-                error: "Mail already registered", 
+                error: "E-postadressen är redan registrerad", 
                 details: error.keyValue 
             });
         }
         console.error("Error:", error);
-        res.status(500).json({ error: "Server error", message: error.message });
+        res.status(500).json({ error: "Server fel", message: error.message });
     }
 });
 
@@ -46,7 +46,7 @@ router.post("/login", async (req, res) => {
 
         // Validate input 
         if(!email || !password) {
-            return res.status(400).json({ error: "Invalid input, send email and password" })
+            return res.status(400).json({ error: "Ogiltigt värden, ange både användarnamn och lösenord." })
         }
 
         // Check credentials
@@ -54,19 +54,19 @@ router.post("/login", async (req, res) => {
         // Does user exist?
         const user = await User.findOne({ email });
         if(!user) {
-            return res.status(401).json({ error: "Incorrect email or password!"})
+            return res.status(401).json({ error: "Ogilitgt användarnamn eller lösenord!"})
         }
         
         // Check password
         const isPasswordMatch = await user.comparePassword(password);
         if(!isPasswordMatch) {
-            return res.status(401).json({ error: "Incorrect email or password!"})
+            return res.status(401).json({ error: "Ogilitgt användarnamn eller lösenord!"})
         } else {
             // Create JWT
             const payload = { email: email };
             const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: "3h"});
             const response = {
-                message: "User logged in",
+                message: "Användare inloggad",
                 token: token
             }
             res.status(200).json(response)

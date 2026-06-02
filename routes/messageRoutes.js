@@ -9,7 +9,7 @@ const Message = require("../models/message");
 router.post("/", async(req, res) => {
     try {
         let result = await Message.create(req.body);
-        return res.status(200).json({ message: "Message sent" });
+        return res.status(200).json({ message: "Meddelande skickat" });
     } catch(error) {
         console.log(error);
         return res.status(400).json({ error: error.message });
@@ -43,7 +43,7 @@ router.put("/:id", authRoutes, async(req, res) => {
         );
 
         // Does message exist?
-        if(!updatedMessage) return res.status(404).json({ error: "Message not found" });
+        if(!updatedMessage) return res.status(404).json({ error: "Meddelandet hittades inte" });
 
         res.status(200).json(updatedMessage);
 

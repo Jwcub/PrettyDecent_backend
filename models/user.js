@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         unique: true,
         required: true,
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Email must be a valid email address"]
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Ogiltig e-postadress"]
     },
     password: {
         type: String,
@@ -59,13 +59,13 @@ userSchema.statics.login = async function(email, password) {
         // Correct email?
         const user = await this.findOne({ email });
         if(!user) {
-            throw new Error("Incorrect email or password!")
+            throw new Error("Användarnamnet eller lösenordet är ogiltigt!")
         }
 
         // Correct password?
         const isPasswordMatch = await comparePassword(password);
         if(!isPasswordMatch) {
-            throw new Error("Incorrect email or password!")
+            throw new Error("Användarnamnet eller lösenordet är ogiltigt!")
         }
 
         // Correct credentielas

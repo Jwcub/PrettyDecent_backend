@@ -25,9 +25,9 @@ mongoose.set("strictQuery", false);
 mongoose.connect(process.env.DATABASE, {
     dbName: "PrettyDecent_DB"
 }).then(() => {
-    console.log("Connected to MongoDB");
+    console.log("Anluten till MongoDB");
 }).catch((error) => {
-    console.error("Error connecting to database", error);
+    console.error("Fel vid anslutning till databas", error);
 });
 
 // Routes
@@ -39,7 +39,7 @@ app.use("/api/message", messageRoutes);
 // Information for base URL
 app.get("/", (req, res) => {
     return res.status(200).json({
-        message: "Welcome to the PrettyDecent API!",
+        message: "Welcome till PrettyDecent API!",
         version: "1.0.0"
     });
 });

@@ -18,7 +18,7 @@ router.post("/", async(req, res) => {
             return res.status(400).json({ message: errorMessage });
         }
 
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Serverfel' });
     } 
 });
 
@@ -49,7 +49,7 @@ router.put("/:id", authRoutes, async(req, res) => {
         );
 
         // Does menu item exist?
-        if(!updatedReservation) return res.status(404).json({ error: "Reservation not found" });
+        if(!updatedReservation) return res.status(404).json({ error: "Reservation hittades inte" });
 
         res.status(200).json(updatedReservation);
 
