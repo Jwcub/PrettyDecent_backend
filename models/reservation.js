@@ -27,7 +27,7 @@ const reservationSchema = new mongoose.Schema({
       {
         // TIME VALIDATION
         validator: function(date) {
-          const timePart = v.split('T')[1]; 
+          const timePart = date.split('T')[1]; 
           if (!timePart) return false;
 
           const hour = parseInt(timePart.split(':')[0], 10);
