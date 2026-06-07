@@ -49,8 +49,7 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({ error: "Ogiltigt värden, ange både användarnamn och lösenord." })
         }
 
-        // Check credentials
-
+    // Check credentials
         // Does user exist?
         const user = await User.findOne({ email });
         if(!user) {
